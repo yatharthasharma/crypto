@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Changyu Dong
  * @author Roberto Metere
- * @author Your Name
+ * @author Yathartha Sharma
  */
 public class Util {
 
