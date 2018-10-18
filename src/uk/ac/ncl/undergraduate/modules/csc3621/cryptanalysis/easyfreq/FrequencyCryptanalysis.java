@@ -3,7 +3,11 @@ package uk.ac.ncl.undergraduate.modules.csc3621.cryptanalysis.easyfreq;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * This class is for frequency cryptanalysis of ciphertext when the key is an
@@ -116,7 +120,46 @@ public class FrequencyCryptanalysis {
     public int cryptanalysis() {
         // Please, do not remove the editor-fold comments.
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
-
+    	double[] freqArray = new double[26];
+    	char[] charArray = new char[26]; 
+    	FrequencyAnalyser w = new FrequencyAnalyser();
+    	FrequencyTable x = w.analyse();
+    	for (int local = 0; local < x.getTable().length; local++) {
+    		freqArray[local] = x.getTable()[local];
+    	}
+    	char c = 'A';
+    	for (int local = 0; local < 26; local++) {
+    		charArray[local] = c;
+    		c++;
+    	}
+    	int totalCountOfLetters = 0;
+    	HashMap<Character, Double> freq = new HashMap<Character, Double>();				// hashmap to analyse cos 
+    	//FrequencyTable y = x.analyse();
+    	byte[] bytes;
+		try {
+			String mainPath = Paths.get(FrequencyAnalyser.class.getResource("/").toURI()).toString();
+	        String plaintextFilePath = mainPath + "/res/Exercise1Ciphertext.txt";
+			bytes = Files.readAllBytes(Paths.get(plaintextFilePath));
+			String str = new String(bytes, StandardCharsets.UTF_8);
+			for (char wz = 'A'; wz <= 'Z'; wz++) {
+				freq.put(wz, 0d);
+			}
+			for (int i = 0; i < str.length(); i++) {
+				char ch = str.charAt(i);
+				if ((ch >= 97 && ch <= 122)) {
+					freq.put(Character.toUpperCase(ch), freq.get(Character.toUpperCase(ch)) + 1);
+					totalCountOfLetters++;
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			// input sample text from the given file
+		sortByValue(freq);
+		for (int i = 0; i < 26; i++) {
+			
+		}*/		
+    	
 
 
 
@@ -245,5 +288,17 @@ public class FrequencyCryptanalysis {
         Util.printBufferToFile(frequencyTable.toString(), solutionFrequencyFilePath);
         Util.printBufferToFile(Integer.toString(cryptanalysis.key), solutionKeyFilePath);
         Util.printBufferToFile(cryptanalysis.plaintext, solutionPlaintextFilePath);
+    }
+    // can be deleted later on
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Entry<K, V>> list = new ArrayList<>(map.entrySet());
+        list.sort(Entry.comparingByValue());
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
     }
 }
