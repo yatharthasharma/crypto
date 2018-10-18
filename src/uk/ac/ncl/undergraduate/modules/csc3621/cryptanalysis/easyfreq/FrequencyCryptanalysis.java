@@ -133,16 +133,18 @@ public class FrequencyCryptanalysis {
     		c++;
     	}
     	int totalCountOfLetters = 0;
-    	HashMap<Character, Double> freq = new HashMap<Character, Double>();				// hashmap to analyse cos 
+    	HashMap<Character, Double> freq = new HashMap<Character, Double>();				// hashmap with total count
+    	HashMap<Character, Double> newFreq = new HashMap<Character, Double>();				// hashmap with freqyency
     	//FrequencyTable y = x.analyse();
     	byte[] bytes;
 		try {
-			String mainPath = Paths.get(FrequencyAnalyser.class.getResource("/").toURI()).toString();
+			String mainPath = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
 	        String plaintextFilePath = mainPath + "/res/Exercise1Ciphertext.txt";
 			bytes = Files.readAllBytes(Paths.get(plaintextFilePath));
 			String str = new String(bytes, StandardCharsets.UTF_8);
 			for (char wz = 'A'; wz <= 'Z'; wz++) {
 				freq.put(wz, 0d);
+				newFreq.put(wz, 0d);
 			}
 			for (int i = 0; i < str.length(); i++) {
 				char ch = str.charAt(i);
@@ -151,14 +153,26 @@ public class FrequencyCryptanalysis {
 					totalCountOfLetters++;
 				}
 			}
+			for (char key : freq.keySet()) {
+				newFreq.put(key, freq.get(key).doubleValue()/totalCountOfLetters);
+			}
+			for (Hashmap key: this.example.keySet()){
+
+		        System.out.println(name);
+			} 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}			// input sample text from the given file
+		catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		sortByValue(freq);
 		for (int i = 0; i < 26; i++) {
 			
-		}*/		
+		}	
     	
 
 

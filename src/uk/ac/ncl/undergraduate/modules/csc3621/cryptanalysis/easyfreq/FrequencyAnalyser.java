@@ -75,12 +75,12 @@ public class FrequencyAnalyser {
 				}
 			}
 			//System.out.println("Total letters is: " + totalCountOfLetters);
-			for (int i = 65; i < 91; i++) {
+			/*for (int i = 65; i < 91; i++) {						// print total number of chars
 				char x = (char)i;
-				//System.out.print(freq.get(x) + " ");
-			}
+				System.out.print(freq.get(x) + " ");
+			}*/
 			for (char key : freq.keySet()) {
-				tableOfFreq.setFrequency(key, freq.get(key).doubleValue()/totalCountOfLetters);
+				tableOfFreq.setFrequency(key, freq.get(key).doubleValue()/totalCountOfLetters);	// calculating frequency
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
