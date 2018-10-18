@@ -122,10 +122,18 @@ public class FrequencyCryptanalysis {
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
     	double[] freqArray = new double[26];
     	char[] charArray = new char[26]; 
+    	double maxFreq = 0;
+    	char maxChar;
     	FrequencyAnalyser w = new FrequencyAnalyser();
     	FrequencyTable x = w.analyse();
     	for (int local = 0; local < x.getTable().length; local++) {
     		freqArray[local] = x.getTable()[local];
+    	}
+    	for (int local = 0; local < freqArray.length; local++) {
+    		if (freqArray[local] > maxFreq) {
+    			maxFreq = freqArray[local];
+    			maxChar = charArray[local];
+    		}
     	}
     	char c = 'A';
     	for (int local = 0; local < 26; local++) {
@@ -156,10 +164,14 @@ public class FrequencyCryptanalysis {
 			for (char key : freq.keySet()) {
 				newFreq.put(key, freq.get(key).doubleValue()/totalCountOfLetters);
 			}
-			for (Hashmap key: this.example.keySet()){
-
-		        System.out.println(name);
+			/*for (char key: freq.keySet()){
+		        System.out.println("TAKE THIS MATE: " + key + " WOOHOO " + freq.get(key));
 			} 
+			for (char key: newFreq.keySet()){
+		        System.out.println("TAKE THIS MATE: " + key + " WOOHOO " + newFreq.get(key));
+			}*/
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,9 +182,7 @@ public class FrequencyCryptanalysis {
 		}
 		
 		sortByValue(freq);
-		for (int i = 0; i < 26; i++) {
-			
-		}	
+		
     	
 
 
