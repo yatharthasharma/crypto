@@ -123,22 +123,22 @@ public class FrequencyCryptanalysis {
     	double[] freqArray = new double[26];
     	char[] charArray = new char[26]; 
     	double maxFreq = 0;
-    	char maxChar;
+    	char maxChar = 0;
     	FrequencyAnalyser w = new FrequencyAnalyser();
     	FrequencyTable x = w.analyse();
     	for (int local = 0; local < x.getTable().length; local++) {
     		freqArray[local] = x.getTable()[local];
+    	}
+    	char c = 'A';
+    	for (int local = 0; local < 26; local++) {
+    		charArray[local] = c;
+    		c++;
     	}
     	for (int local = 0; local < freqArray.length; local++) {
     		if (freqArray[local] > maxFreq) {
     			maxFreq = freqArray[local];
     			maxChar = charArray[local];
     		}
-    	}
-    	char c = 'A';
-    	for (int local = 0; local < 26; local++) {
-    		charArray[local] = c;
-    		c++;
     	}
     	int totalCountOfLetters = 0;
     	HashMap<Character, Double> freq = new HashMap<Character, Double>();				// hashmap with total count
@@ -164,29 +164,29 @@ public class FrequencyCryptanalysis {
 			for (char key : freq.keySet()) {
 				newFreq.put(key, freq.get(key).doubleValue()/totalCountOfLetters);
 			}
-			/*for (char key: freq.keySet()){
+			for (char key: freq.keySet()){
 		        System.out.println("TAKE THIS MATE: " + key + " WOOHOO " + freq.get(key));
-			} 
+			}
 			for (char key: newFreq.keySet()){
 		        System.out.println("TAKE THIS MATE: " + key + " WOOHOO " + newFreq.get(key));
-			}*/
-			
-			
+			}
+			//System.out.println("MAXCHAR is " + maxChar + " and MAXFREQ is " + maxFreq);
+			double maxValueInMap = Collections.max(newFreq.values());
+			char maxKeyInMap = 'A';
+			for (Entry<Character, Double> entry: newFreq.entrySet()) {
+				if (entry.getValue().equals(maxValueInMap)) {
+					maxKeyInMap = entry.getKey();
+				}
+			}
+			int key = (int)maxKeyInMap - (int)maxChar;				// subtracting ascii codes of characters to get the key
+			System.out.println(key);
+			this.key = key;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}			// input sample text from the given file
-		catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		sortByValue(freq);
-		
-    	
-
-
-
+		catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
         //</editor-fold> // END OF YOUR CODE
         // The following code allows you to manually adjust your result.
         if (this.interactive) {
