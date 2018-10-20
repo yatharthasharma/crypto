@@ -13,7 +13,6 @@ public class AnalyseText {
 			String str = new String(bytes, StandardCharsets.UTF_8);
 			obj.setText(str);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

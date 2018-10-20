@@ -3,6 +3,8 @@ package uk.ac.ncl.undergraduate.modules.csc3621.cryptanalysis.easyfreq;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
@@ -240,7 +242,43 @@ public class FrequencyCryptanalysis {
     public void decrypt() {
         // Please, do not remove the editor-fold comments.
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
-
+    	String mainPath, cipherPlaintextFilePath;
+		byte[] bytes;
+    	try {
+			mainPath = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
+	        cipherPlaintextFilePath= mainPath + "/res/Exercise1Ciphertext.txt";
+	        bytes = Files.readAllBytes(Paths.get(cipherPlaintextFilePath)); // input sample text from the given file
+			String str = new String(bytes, StandardCharsets.UTF_8);
+			char[] plainText = new char[str.length()];
+			for (int i = 0; i < str.length(); i++) {
+				char ch = Character.toUpperCase(str.charAt(i));
+				if (ch >= 69 && ch <= 90) {
+					ch = (char)((int)ch - (key % 26));
+					plainText[i] = ch;
+				}else if(ch > 64 && ch < 69){
+					if (ch == 65){
+						ch = 87;
+						plainText[i] = ch;
+					}else if(ch == 66){
+						ch = 88;
+						plainText[i] = ch;
+					}else if(ch == 67){
+						ch = 89;
+						plainText[i] = ch;
+					}else{
+						ch = 90;
+						plainText[i] = ch;
+					}
+				}else{
+					plainText[i] = ch;
+				}
+			}
+			this.plaintext = new String(plainText);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 
 
