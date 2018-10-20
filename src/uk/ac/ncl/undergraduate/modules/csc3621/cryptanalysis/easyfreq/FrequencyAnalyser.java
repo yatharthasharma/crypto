@@ -18,78 +18,68 @@ import java.util.Map;
  */
 public class FrequencyAnalyser {
 
-    /**
-     * The text to analyse
-     */
-    private String text;
+	/**
+	 * The text to analyse
+	 */
+	private String text;
 
-    /**
-     * Get the text to analyse.
-     *
-     * @return the text to analyse.
-     */
-    public String getText() {
-        return text;
-    }
+	/**
+	 * Get the text to analyse.
+	 *
+	 * @return the text to analyse.
+	 */
+	public String getText() {
+		return text;
+	}
 
-    /**
-     * Set the text to analyse.
-     *
-     * @param text the text to analyse.
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
+	/**
+	 * Set the text to analyse.
+	 *
+	 * @param text
+	 *            the text to analyse.
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    /**
-     * This method returns a frequency table as a result of the analysis of the
-     * text.
-     *
-     * TODO: complete the function that conduct a frequency analysis of the
-     * internal buffer and produce a frequency table based on the analysis.
-     * Please, write your code between the comments as appropriate.
-     *
-     * @return frequency table as a result of the analysis of the text
-     */
-    public FrequencyTable analyse(){						// throws IOExecption
-        // Please, do not remove the editor-fold comments.
-        //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
-		byte[] bytes;
-		FrequencyTable tableOfFreq = new FrequencyTable();						// declaring FrequencyTable object that is to be returned
+	/**
+	 * This method returns a frequency table as a result of the analysis of the
+	 * text.
+	 *
+	 * TODO: complete the function that conduct a frequency analysis of the
+	 * internal buffer and produce a frequency table based on the analysis.
+	 * Please, write your code between the comments as appropriate.
+	 *
+	 * @return frequency table as a result of the analysis of the text
+	 */
+	public FrequencyTable analyse() { // throws IOExecption
+		// Please, do not remove the editor-fold comments.
+		// <editor-fold defaultstate="collapsed" desc="Write your code here
+		// below!">
+		FrequencyTable tableOfFreq = new FrequencyTable(); // declaring
+															// FrequencyTable
+															// object that is to
+															// be returned
 		int totalCountOfLetters = 0;
-		Map <Character, Double> freq = new HashMap<Character, Double>();
-		String mainPath, plaintextFilePath;
-		try {
-			mainPath = Paths.get(FrequencyAnalyser.class.getResource("/").toURI()).toString();
-	        plaintextFilePath = mainPath + "/res/pg1661.txt";
-			bytes = Files.readAllBytes(Paths.get(plaintextFilePath));			// input sample text from the given file
-			String str = new String(bytes, StandardCharsets.UTF_8);
-			for (char x = 'A'; x <= 'Z'; x++) {
-				freq.put(x, 0d);
+		Map<Character, Double> freq = new HashMap<Character, Double>();
+		String str = this.getText();
+		for (char x = 'A'; x <= 'Z'; x++) {
+			freq.put(x, 0d);
+		}
+		for (int i = 0; i < str.length(); i++) {
+			char ch = Character.toUpperCase(str.charAt(i));
+			if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)) {
+				freq.put(ch, freq.get(ch) + 1);
+				totalCountOfLetters++;
 			}
-			for (int i = 0; i < str.length(); i++) {
-				char ch = Character.toUpperCase(str.charAt(i));
-				if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)) {
-					freq.put(ch, freq.get(ch) + 1);
-					totalCountOfLetters++;	
-				}
-			}
-			//System.out.println("Total letters is: " + totalCountOfLetters);
-			/*for (int i = 65; i < 91; i++) {						// print total number of chars
-				char x = (char)i;
-				System.out.print(freq.get(x) + " ");
-			}*/
-			for (char key : freq.keySet()) {
-				tableOfFreq.setFrequency(key, freq.get(key).doubleValue()/totalCountOfLetters);	// calculating frequency
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+		}
+		for (char key : freq.keySet()) {
+			tableOfFreq.setFrequency(key, freq.get(key).doubleValue() / totalCountOfLetters); // calculating
+																								// frequency
 		}
 		return tableOfFreq;
-		
-        //</editor-fold> // END OF YOUR CODE
-    }
+
+		// </editor-fold> // END OF YOUR CODE
+	}
 
 }

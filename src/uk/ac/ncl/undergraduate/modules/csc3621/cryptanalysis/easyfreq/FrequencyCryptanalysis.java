@@ -3,8 +3,6 @@ package uk.ac.ncl.undergraduate.modules.csc3621.cryptanalysis.easyfreq;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
@@ -120,69 +118,65 @@ public class FrequencyCryptanalysis {
     public int cryptanalysis() {
         // Please, do not remove the editor-fold comments.
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
-    	double[] freqArray = new double[26];
-    	char[] charArray = new char[26]; 
+    	double[] freqArray = new double[26];			// freq analysis from pg1661
+    	char[] charArray = new char[26]; 				// freq analysis from pg1661
     	double maxFreq = 0;
     	char maxChar = 0;
     	FrequencyAnalyser w = new FrequencyAnalyser();
-    	FrequencyTable x = w.analyse();
-    	for (int local = 0; local < x.getTable().length; local++) {
-    		freqArray[local] = x.getTable()[local];
-    	}
-    	char c = 'A';
-    	for (int local = 0; local < 26; local++) {
-    		charArray[local] = c;
-    		c++;
-    	}
-    	for (int local = 0; local < freqArray.length; local++) {
-    		if (freqArray[local] > maxFreq) {
-    			maxFreq = freqArray[local];
-    			maxChar = charArray[local];
-    		}
-    	}
-    	int totalCountOfLetters = 0;
-    	HashMap<Character, Double> freq = new HashMap<Character, Double>();				// hashmap with total count
-    	HashMap<Character, Double> newFreq = new HashMap<Character, Double>();				// hashmap with freqyency
-    	//FrequencyTable y = x.analyse();
-    	byte[] bytes;
+    	AnalyseText analyse = new AnalyseText();
+    	String mainPath;
 		try {
-			String mainPath = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
-	        String plaintextFilePath = mainPath + "/res/Exercise1Ciphertext.txt";
-			bytes = Files.readAllBytes(Paths.get(plaintextFilePath));
-			String str = new String(bytes, StandardCharsets.UTF_8);
-			for (char wz = 'A'; wz <= 'Z'; wz++) {
-				freq.put(wz, 0d);
-				newFreq.put(wz, 0d);
-			}
-			for (int i = 0; i < str.length(); i++) {
-				char ch = str.charAt(i);
-				if ((ch >= 97 && ch <= 122)) {
-					freq.put(Character.toUpperCase(ch), freq.get(Character.toUpperCase(ch)) + 1);
-					totalCountOfLetters++;
-				}
-			}
-			for (char key : freq.keySet()) {
-				newFreq.put(key, freq.get(key).doubleValue()/totalCountOfLetters);
-			}
-			for (char key: freq.keySet()){
-		        System.out.println("TAKE THIS MATE: " + key + " WOOHOO " + freq.get(key));
-			}
-			for (char key: newFreq.keySet()){
-		        System.out.println("TAKE THIS MATE: " + key + " WOOHOO " + newFreq.get(key));
-			}
-			//System.out.println("MAXCHAR is " + maxChar + " and MAXFREQ is " + maxFreq);
-			double maxValueInMap = Collections.max(newFreq.values());
-			char maxKeyInMap = 'A';
-			for (Entry<Character, Double> entry: newFreq.entrySet()) {
-				if (entry.getValue().equals(maxValueInMap)) {
-					maxKeyInMap = entry.getKey();
-				}
-			}
-			int key = (int)maxKeyInMap - (int)maxChar;				// subtracting ascii codes of characters to get the key
-			System.out.println(key);
+			mainPath = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
+			String plaintextFilePath = mainPath + "/res/pg1661.txt";
+	        analyse.Analysing(plaintextFilePath, w);
+	        FrequencyTable x = w.analyse();
+	    	for (int local = 0; local < x.getTable().length; local++) {
+	    		freqArray[local] = x.getTable()[local];
+	    	}
+	    	char c = 'A';
+	    	for (int local = 0; local < 26; local++) {
+	    		charArray[local] = c;
+	    		c++;
+	    	}
+	    	for (int local = 0; local < freqArray.length; local++) {
+	    		if (freqArray[local] > maxFreq) {
+	    			maxFreq = freqArray[local];
+	    			maxChar = charArray[local];
+	    		}
+	    	}
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	double[] freqArrayForCipherText = new double[26];			// freq analysis for cipher text file
+    	char[] charArrayForCipherText = new char[26]; 				// freq analysis for cipher text file
+    	double maxFreqForCipherText = 0;
+    	char maxCharForCipherText = 0;
+    	FrequencyAnalyser cipherTextFreq = new FrequencyAnalyser();
+    	AnalyseText cipherTextAnalyse = new AnalyseText();
+    	String mainPathForCipherText;
+		try {
+			mainPathForCipherText = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
+	        String cipherPlaintextFilePath = mainPathForCipherText + "/res/Exercise1Ciphertext.txt";
+	        cipherTextAnalyse.Analysing(cipherPlaintextFilePath, cipherTextFreq);
+	        FrequencyTable xyz = cipherTextFreq.analyse();
+	        for (int local = 0; local < xyz.getTable().length; local++) {
+	    		freqArrayForCipherText[local] = xyz.getTable()[local];
+	    	}
+	    	char c = 'A';
+	    	for (int local = 0; local < 26; local++) {
+	    		charArrayForCipherText[local] = c;
+	    		c++;
+	    	}
+	    	for (int local = 0; local < freqArrayForCipherText.length; local++) {
+	    		if (freqArrayForCipherText[local] > maxFreqForCipherText) {
+	    			maxFreqForCipherText = freqArrayForCipherText[local];
+	    			maxCharForCipherText = charArrayForCipherText[local];
+	    		}
+	    	}
+	    	System.out.println(maxChar + " hello " + maxCharForCipherText);
+			int key = (int)maxCharForCipherText - (int)maxChar;				// subtracting ascii codes of characters to get the key
 			this.key = key;
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		catch (URISyntaxException e) {
 			e.printStackTrace();
