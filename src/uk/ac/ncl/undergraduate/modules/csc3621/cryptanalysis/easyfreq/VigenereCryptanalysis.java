@@ -252,7 +252,7 @@ public class VigenereCryptanalysis {
         cryptanalysis.setCiphertext(ciphertext);
         cryptanalysis.cryptanalysis();
         cryptanalysis.showResult();
-
+        
         // Write solution in res path
         if (!solutionDirectory.exists()) {
             solutionDirectory.mkdir();

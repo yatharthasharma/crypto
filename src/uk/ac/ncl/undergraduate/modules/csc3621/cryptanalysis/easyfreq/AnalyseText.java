@@ -16,4 +16,11 @@ public class AnalyseText {
 			e.printStackTrace();
 		}
 	}
+	// freq of english letters from pg1661.txt for ex1part1
+	public static int searchIndex(char[] a, char target){
+			for (int i = 0; i < a.length; i++)
+				if (a[i] == target)
+					return i;
+			return -1;
+		}
 }
