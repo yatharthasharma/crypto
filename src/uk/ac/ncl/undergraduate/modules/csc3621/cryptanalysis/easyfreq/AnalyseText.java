@@ -16,11 +16,12 @@ public class AnalyseText {
 			e.printStackTrace();
 		}
 	}
-	// freq of english letters from pg1661.txt for ex1part1
-	public static int searchIndex(char[] a, char target){
-			for (int i = 0; i < a.length; i++)
-				if (a[i] == target)
-					return i;
-			return -1;
+	// freq of english letters from pg1661.txt for ex1part1 -> CREATE METHOD
+	// check if given character is within range 0-25 for character array that's being used in VigenereCipher class
+	public static boolean outOfLimits(char x){							
+		if (x > 25 || x < 0){
+			return true;
 		}
+		return false;
+	}
 }

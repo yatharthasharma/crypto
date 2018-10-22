@@ -13,9 +13,10 @@ public class EncryptVigenere {
 			String plaintextFilePath = mainPath + "/res/pg1661.txt";
 			byte[] bytes = Files.readAllBytes(Paths.get(plaintextFilePath)); // input sample text from the given file
 			String str = new String(bytes, StandardCharsets.UTF_8);
-			String encryptedText = VigenereCipher.encrypt(str, "hello");
-			String decryptedText = VigenereCipher.decrypt(encryptedText, "hello");
-			System.out.println();
+			String encryptedText = VigenereCipher.encrypt(str, "ncl");
+			String decryptedText = VigenereCipher.decrypt(encryptedText, "ncl");
+			System.out.println("Ecnrypted text : " + encryptedText);
+			System.out.println("Decrypted text: " + decryptedText);
 			FrequencyAnalyser x = new FrequencyAnalyser();
 			AnalyseText y = new AnalyseText();
 			y.Analysing(plaintextFilePath, x);
