@@ -7,11 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class EncryptVigenere {
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		try {
 			String mainPath = Paths.get(EncryptVigenere.class.getResource("/").toURI()).toString();
 			String plaintextFilePath = mainPath + "/res/pg1661.txt";
-			byte[] bytes = Files.readAllBytes(Paths.get(plaintextFilePath)); // input sample text from the given file
+			byte[] bytes = Files.readAllBytes(Paths.get(plaintextFilePath));
 			String str = new String(bytes, StandardCharsets.UTF_8);
 			String encryptedText = VigenereCipher.encrypt(str, "ncl");
 			String decryptedText = VigenereCipher.decrypt(encryptedText, "ncl");
@@ -26,6 +26,6 @@ public class EncryptVigenere {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }
