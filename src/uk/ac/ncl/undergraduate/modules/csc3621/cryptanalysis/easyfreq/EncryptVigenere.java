@@ -11,16 +11,25 @@ public class EncryptVigenere {
 		try {
 			String mainPath = Paths.get(EncryptVigenere.class.getResource("/").toURI()).toString();
 			String plaintextFilePath = mainPath + "/res/pg1661.txt";
+			String encPath = mainPath + "/mine/encPath.txt";
+			String decPath = mainPath + "/mine/decPath.txt";
+			String freqAnal = mainPath + "/mine/freqAnal.txt";
 			byte[] bytes = Files.readAllBytes(Paths.get(plaintextFilePath));
 			String str = new String(bytes, StandardCharsets.UTF_8);
-			String encryptedText = VigenereCipher.encrypt(str, "ncl");
-			String decryptedText = VigenereCipher.decrypt(encryptedText, "ncl");
-			System.out.println("Ecnrypted text : " + encryptedText);
-			System.out.println("Decrypted text: " + decryptedText);
+			System.out.println("entereing encrypt ");
+			String encryptedText = VigenereCipher.encrypt(str, "nclajbsdkjabskjbaskdbasukdbuaksbkfjdsbkjdbskjdbskdskbfkjdsbkjdbskjfdskjbfskjdbfkjsdbkjdbskjfnclajbsdkjabskjbaskdbasukdbuaksbkfjdsbkjdbskjdbskdskbfkjdsbkjdbskjfdskjbfskjdbfkjsdbkjdbskjfnclajbsdkjabskjbaskdbasukdbuaksbkfjdsbkjdbskjdbskdskbfkjdsbkjdbskjfdskjbfskjdbfkjsdbkjdbskjf");
+			System.out.println("entereing decrypt ");
+			String decryptedText = VigenereCipher.decrypt(encryptedText, "nclajbsdkjabskjbaskdbasukdbuaksbkfjdsbkjdbskjdbskdskbfkjdsbkjdbskjfdskjbfskjdbfkjsdbkjdbskjfnclajbsdkjabskjbaskdbasukdbuaksbkfjdsbkjdbskjdbskdskbfkjdsbkjdbskjfdskjbfskjdbfkjsdbkjdbskjfnclajbsdkjabskjbaskdbasukdbuaksbkfjdsbkjdbskjdbskdskbfkjdsbkjdbskjfdskjbfskjdbfkjsdbkjdbskjf");
+			System.out.println("leaving decrypt ");
+			Util.printBufferToFile(encryptedText, encPath);
+			Util.printBufferToFile(decryptedText, decPath);
 			FrequencyAnalyser x = new FrequencyAnalyser();
-			AnalyseText y = new AnalyseText();
-			y.Analysing(plaintextFilePath, x);
+			AnalyseText.Analysing(plaintextFilePath, x);
 			FrequencyTable z = x.analyse();
+			for (int i = 0; i < z.getTable().length; i++){
+				System.out.println(z.getTable()[i]);
+				Util.printBufferToFile(Double.toString(z.getTable()[i]), freqAnal);
+			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

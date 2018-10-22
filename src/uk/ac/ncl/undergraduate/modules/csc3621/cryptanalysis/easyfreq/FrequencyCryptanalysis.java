@@ -125,12 +125,12 @@ public class FrequencyCryptanalysis {
     	double maxFreq = 0;
     	char maxChar = 0;
     	FrequencyAnalyser w = new FrequencyAnalyser();
-    	AnalyseText analyse = new AnalyseText();
+    	//AnalyseText analyse = new AnalyseText();
     	String mainPath;
 		try {
 			mainPath = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
 			String plaintextFilePath = mainPath + "/res/pg1661.txt";
-	        analyse.Analysing(plaintextFilePath, w);
+	        AnalyseText.Analysing(plaintextFilePath, w);
 	        FrequencyTable x = w.analyse();
 	    	for (int local = 0; local < x.getTable().length; local++) {
 	    		freqArray[local] = x.getTable()[local];
@@ -155,12 +155,12 @@ public class FrequencyCryptanalysis {
     	double maxFreqForCipherText = 0;
     	char maxCharForCipherText = 0;
     	FrequencyAnalyser cipherTextFreq = new FrequencyAnalyser();
-    	AnalyseText cipherTextAnalyse = new AnalyseText();
+    	//AnalyseText cipherTextAnalyse = new AnalyseText();
     	String mainPathForCipherText;
 		try {
 			mainPathForCipherText = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
 	        String cipherPlaintextFilePath = mainPathForCipherText + "/res/Exercise1Ciphertext.txt";
-	        cipherTextAnalyse.Analysing(cipherPlaintextFilePath, cipherTextFreq);
+	        AnalyseText.Analysing(cipherPlaintextFilePath, cipherTextFreq);
 	        FrequencyTable xyz = cipherTextFreq.analyse();
 	        for (int local = 0; local < xyz.getTable().length; local++) {
 	    		freqArrayForCipherText[local] = xyz.getTable()[local];
@@ -176,7 +176,6 @@ public class FrequencyCryptanalysis {
 	    			maxCharForCipherText = charArrayForCipherText[local];
 	    		}
 	    	}
-	    	System.out.println(maxChar + " hello " + maxCharForCipherText);
 			int key = (int)maxCharForCipherText - (int)maxChar;				// subtracting ascii codes of characters to get the key
 			this.key = key;
 		}

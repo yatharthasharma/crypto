@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class AnalyseText {
-	public void Analysing(String path, FrequencyAnalyser obj) {
+	public static void Analysing(String path, FrequencyAnalyser obj) {
 		byte[] bytes;
 		try {
 			bytes = Files.readAllBytes(Paths.get(path)); // input sample text from the given file

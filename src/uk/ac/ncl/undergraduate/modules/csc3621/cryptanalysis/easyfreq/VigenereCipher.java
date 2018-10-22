@@ -24,8 +24,8 @@ public class VigenereCipher {
         // Please, do not remove the editor-fold comments.
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
     	//plaintext = "newcastleuniversity";
+    	//key = "ncl";
     	plaintext = plaintext.toUpperCase();
-    	//key = "NCL";
     	key = key.toUpperCase();
     	String ciphertext = "";
     	int keyLength = 0;
