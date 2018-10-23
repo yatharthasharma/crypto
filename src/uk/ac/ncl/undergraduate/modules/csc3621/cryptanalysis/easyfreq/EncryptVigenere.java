@@ -24,7 +24,7 @@ public class EncryptVigenere {
 			Util.printBufferToFile(encryptedText, encPath);
 			Util.printBufferToFile(decryptedText, decPath);
 			FrequencyAnalyser x = new FrequencyAnalyser();
-			AnalyseText.Analysing(plaintextFilePath, x);
+			AnalyseText.Analysing(encPath, x);
 			FrequencyTable z = x.analyse();
 			for (int i = 0; i < z.getTable().length; i++){
 				System.out.println(z.getTable()[i]);

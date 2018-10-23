@@ -156,7 +156,7 @@ public class VigenereCryptanalysis {
     public String cryptanalysis() {
         // Please, do not remove the editor-fold comments.
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
-
+    	
 
 
 
