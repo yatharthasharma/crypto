@@ -68,7 +68,7 @@ public class FrequencyAnalyser {
 		}
 		for (int i = 0; i < str.length(); i++) {
 			char ch = Character.toUpperCase(str.charAt(i));
-			if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)) {
+			if ((ch >= 65 && ch <= 90)) {
 				freq.put(ch, freq.get(ch) + 1);
 				totalCountOfLetters++;
 			}

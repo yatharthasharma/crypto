@@ -3,6 +3,8 @@ package uk.ac.ncl.undergraduate.modules.csc3621.cryptanalysis.easyfreq;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
@@ -156,7 +158,26 @@ public class VigenereCryptanalysis {
     public String cryptanalysis() {
         // Please, do not remove the editor-fold comments.
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
-    	
+    	VigenereCryptanalysis v = new VigenereCryptanalysis();
+    	String mainPathForCipherText;
+    	byte[] bytes;
+    	int keylength = 2;
+    	try {
+			mainPathForCipherText = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
+	        String cipherPlaintextFilePath = mainPathForCipherText + "/res/Exercise2Ciphertext.txt";
+	        bytes = Files.readAllBytes(Paths.get(cipherPlaintextFilePath)); // input sample text from the given file
+			String str = new String(bytes, StandardCharsets.UTF_8);
+			v.setCiphertext(str);
+			for (int i = 0; i < 10; i++){
+				keylength++;
+				
+			}
+			
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 
 

@@ -132,9 +132,10 @@ public class FrequencyCryptanalysis {
 			String plaintextFilePath = mainPath + "/res/pg1661.txt";
 	        AnalyseText.Analysing(plaintextFilePath, w);
 	        FrequencyTable x = w.analyse();
-	    	for (int local = 0; local < x.getTable().length; local++) {
+	    	freqArray = x.getTable();
+	        /*for (int local = 0; local < x.getTable().length; local++) {
 	    		freqArray[local] = x.getTable()[local];
-	    	}
+	    	}*/
 	    	char c = 'A';
 	    	for (int local = 0; local < 26; local++) {
 	    		charArray[local] = c;

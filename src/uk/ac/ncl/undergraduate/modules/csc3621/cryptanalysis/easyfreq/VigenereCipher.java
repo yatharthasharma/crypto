@@ -25,8 +25,8 @@ public class VigenereCipher {
         //<editor-fold defaultstate="collapsed" desc="Write your code here below!">
     	//plaintext = "newcastleuniversity";
     	//key = "ncl";
-    	plaintext = plaintext.toUpperCase();
-    	key = key.toUpperCase();
+    	plaintext = plaintext.toUpperCase();							// change plaintext chars to uppercase
+    	key = key.toUpperCase();										// change key chars to uppercase
     	String ciphertext = "";
     	int keyLength = 0;
     	for (int i = 0; i < plaintext.length(); i++){
@@ -65,9 +65,9 @@ public class VigenereCipher {
     		charArray[local] = c;
     		c++;										//code up till here declares a character array 'charArray' which stores the english characters A - Z.
     	}												
-    	//ciphertext = "aghpcdgnphptigcfkel";
+    	//ciphertext = "aghpcdgnphptigcfkel";			// 
     	ciphertext = ciphertext.toUpperCase();			// convert all ciphertext to uppercase
-    	//key = "ncl";
+    	//key = "ncl";									//
     	key = key.toUpperCase();									// convert key to uppercase
     	String plaintext = "";										// declare plaintext
     	int keyLength = 0;											// counter which helps us retrieve the correct character from the key to decrypt the message
