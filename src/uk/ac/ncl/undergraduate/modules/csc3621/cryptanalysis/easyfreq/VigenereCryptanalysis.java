@@ -177,23 +177,24 @@ public class VigenereCryptanalysis {
 				IOCs[i] = AnalyseText.indexOfCoincidence(cipherText, i+2);
 				System.out.println("This is for key length " + (i+2) + ": " + IOCs[i]);
 			}
-			IOCDiff = IOCs[0];
+			double eng = 0.067;
+			IOCDiff = Math.abs(IOCs[0] - eng);
+			int haha = 0;
 			keyLength = 2;
-			for (int i = 0; i < 8; i++){
-				if (Math.abs(0.067 - IOCs[i+1]) < Math.abs(0.067 - IOCs[i])){
-					IOCDiff = IOCs[i+1];
-					keyLength++;
+			for (int i = 1; i < IOCs.length; i++){
+				double xdistance = Math.abs(IOCs[i] - eng);
+				if (xdistance < IOCDiff){
+					haha = i;
+					IOCDiff = xdistance;
 				}
 			}
-			for (int i = 0; i < 9; i++){
-				if (IOCDiff == AnalyseText.indexOfCoincidence(cipherText, i+2)){
-					keyLength = i + 2;
-				}
+			System.out.println("what is it now?: " + IOCs[haha] + " and the key is: " + (haha+2));
+			keyLength = haha+2;
+			int[] keys = AnalyseText.freqAnalysisForVigenere(AnalyseText.getSubstrings(cipherText, keyLength));
+			for (int x : keys){
+				System.out.println(x);
 			}
-			System.out.println("What's the key length? " + keyLength + " and IOC: " + IOCDiff);
-			for (int i = 0; i < keyLength; i++){
-				this.key.append("A");
-			}
+			this.key.append("A");
 			// set path and key and get index of coincidences.
 
 		} catch (URISyntaxException e) {
