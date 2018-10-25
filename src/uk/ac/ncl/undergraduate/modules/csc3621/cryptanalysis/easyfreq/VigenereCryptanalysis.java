@@ -169,13 +169,13 @@ public class VigenereCryptanalysis {
 		int keyLength;
 		try {
 			mainPathForCipherText = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
-			String cipherPlaintextFilePath = mainPathForCipherText + "/res/pg1661.txt";
+			String cipherPlaintextFilePath = mainPathForCipherText + "/res/Exercise2Ciphertext.txt";
 			// AnalyseText.Analysing(cipherPlaintextFilePath, w);
 			bytes = Files.readAllBytes(Paths.get(cipherPlaintextFilePath)); // input text from the file
 			String cipherText = new String(bytes, StandardCharsets.UTF_8);
 			for (int i = 0; i < 9; i++){
 				IOCs[i] = AnalyseText.indexOfCoincidence(cipherText, i+2);
-				System.out.println(IOCs[i]);
+				System.out.println("This is for key length " + (i+2) + ": " + IOCs[i]);
 			}
 			IOCDiff = IOCs[0];
 			keyLength = 2;
@@ -185,6 +185,12 @@ public class VigenereCryptanalysis {
 					keyLength++;
 				}
 			}
+			for (int i = 0; i < 9; i++){
+				if (IOCDiff == AnalyseText.indexOfCoincidence(cipherText, i+2)){
+					keyLength = i + 2;
+				}
+			}
+			System.out.println("What's the key length? " + keyLength + " and IOC: " + IOCDiff);
 			for (int i = 0; i < keyLength; i++){
 				this.key.append("A");
 			}

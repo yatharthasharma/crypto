@@ -30,8 +30,11 @@ public class AnalyseText {
 		cipherText = cipherText.toUpperCase();
 		int key = keyLength;
 		double num = 0;
-		double[] total = new double[keyLength];
+		double[] total;
 		String[] arrayOfSubstrings = new String[keyLength];
+		for (int j = 0; j < arrayOfSubstrings.length; j++){
+			arrayOfSubstrings[j] = "";
+		}
 		for (int j = 0; j < arrayOfSubstrings.length; j++){
 			for (int i = j; i < cipherText.length(); i++){
 				arrayOfSubstrings[j] += cipherText.charAt(i);
@@ -46,30 +49,27 @@ public class AnalyseText {
 	}
 	public static double[] averageIndexOfCoincidence(String[] x){							// index of coincidence for all the substrings
 		double[] totalArray = new double[x.length];											// array of IOCs for all the substrings		
-		//for (int j = 0; j < x.length; j++){
-			//int length = x[j].length();
 			for (int i = 0; i < x.length; i++){
-				totalArray[i] = result(x[i]);								// x[i] pointing to one specific substring from the arrayOfSubstrings		
+				totalArray[i] = result(x[i]);					// x[i] pointing to one specific substring from the arrayOfSubstrings		
+				//System.out.println("this key: " + x[i]);
 				//System.out.println("average of this key: " + totalArray[i]);
 			}
-		//}
 		return totalArray;
 	}
 	public static double result(String x){									// index of coincidence for a specific character in a given substring
 		double xyz = 0d;
 		for (char i = 'A'; i <= 'Z'; i++){
 			xyz += individualIC(numberOfLetters(x, i));
-			System.out.println("HAHA TAKE THIS char : " + i + " yeah boi " + xyz);
+			//System.out.println("HAHA TAKE THIS char : " + i + " yeah boi " + xyz);
 		}
 		return xyz;
 	}
-	public static double individualIC(int[] x){					// for one character in a given substring, taking in numberofchars, count of letters
-		double z = x[0];
-		return (z * (z - 1)) / (x[1] * (x[1] - 1));
+	public static double individualIC(double[] x){					// for one character in a given substring, taking in numberofchars, count of letters
+		return (x[0] * (x[0] - 1)) / (x[1] * (x[1] - 1));
 	}
-	public static int[] numberOfLetters (String cipherText, char x){		// number of a specific letter in the given CT and the total count of letters
+	public static double[] numberOfLetters (String cipherText, char x){		// number of a specific letter in the given CT and the total count of letters
 		Map<Character, Double> freq = new HashMap<Character, Double>();
-		int totalCountOfLetters = 0;
+		double totalCountOfLetters = 0;
 		for (char xyz = 'A'; xyz <= 'Z'; xyz++) {
 			freq.put(xyz, 0d);
 		}
@@ -77,10 +77,10 @@ public class AnalyseText {
 			char ch = Character.toUpperCase(cipherText.charAt(i));
 			if ((ch >= 65 && ch <= 90)) {
 				freq.put(ch, freq.get(ch) + 1);
-				totalCountOfLetters++;
+				totalCountOfLetters = totalCountOfLetters + 1;
 			}
 		}
-		int[] val = {freq.get(x).intValue(), totalCountOfLetters};
+		double[] val = {freq.get(x).doubleValue(), totalCountOfLetters};
 		return val;
 	}
 }
