@@ -38,7 +38,7 @@ public class AnalyseText {
 		for (int j = 0; j < arrayOfSubstrings.length; j++){
 			for (int i = j; i < cipherText.length(); i++){
 				arrayOfSubstrings[j] += cipherText.charAt(i);
-				i += keyLength;
+				i += keyLength - 1;
 			}
 		}
 		total = averageIndexOfCoincidence(arrayOfSubstrings);
