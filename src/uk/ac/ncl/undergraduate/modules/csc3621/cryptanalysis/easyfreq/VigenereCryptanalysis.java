@@ -169,7 +169,7 @@ public class VigenereCryptanalysis {
 		int keyLength;
 		try {
 			mainPathForCipherText = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
-			String cipherPlaintextFilePath = mainPathForCipherText + "/res/Exercise2Ciphertext.txt";
+			String cipherPlaintextFilePath = mainPathForCipherText + "/res/pg1661.txt";
 			// AnalyseText.Analysing(cipherPlaintextFilePath, w);
 			bytes = Files.readAllBytes(Paths.get(cipherPlaintextFilePath)); // input text from the file
 			String cipherText = new String(bytes, StandardCharsets.UTF_8);
@@ -182,7 +182,7 @@ public class VigenereCryptanalysis {
 			for (int i = 0; i < 8; i++){
 				if (Math.abs(0.067 - IOCs[i+1]) < Math.abs(0.067 - IOCs[i])){
 					IOCDiff = IOCs[i+1];
-					keyLength = i + 3;
+					keyLength++;
 				}
 			}
 			for (int i = 0; i < keyLength; i++){

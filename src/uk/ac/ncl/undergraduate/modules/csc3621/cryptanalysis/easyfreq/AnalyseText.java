@@ -26,8 +26,9 @@ public class AnalyseText {
 	public static boolean outOfLimits(char x){	
 		return (x > 25 || x < 0);
 	}
-	public static double indexOfCoincidence(String cipherText, int keyLength){
+	public static double indexOfCoincidence(String cipherText, int keyLength){				// index of coincidence given a specific key length
 		cipherText = cipherText.toUpperCase();
+		int key = keyLength;
 		double num = 0;
 		double[] total = new double[keyLength];
 		String[] arrayOfSubstrings = new String[keyLength];
@@ -39,26 +40,30 @@ public class AnalyseText {
 		}
 		total = averageIndexOfCoincidence(arrayOfSubstrings);
 		for (int j = 0; j < arrayOfSubstrings.length; j++){
-			num += total[j]; 
-			// numberOfLetters(arrayOfSubstrings[j]);
+			num += total[j];
 		}
-		return num;
+		return num/key;
 	}
-	public static double[] averageIndexOfCoincidence(String[] x){
-		double[] totalArray = new double[x.length];
-		for (int j = 0; j < x.length; j++){
-			totalArray[j] += result(x[j]);	
-		}
+	public static double[] averageIndexOfCoincidence(String[] x){							// index of coincidence for all the substrings
+		double[] totalArray = new double[x.length];											// array of IOCs for all the substrings		
+		//for (int j = 0; j < x.length; j++){
+			//int length = x[j].length();
+			for (int i = 0; i < x.length; i++){
+				totalArray[i] = result(x[i]);								// x[i] pointing to one specific substring from the arrayOfSubstrings		
+				//System.out.println("average of this key: " + totalArray[i]);
+			}
+		//}
 		return totalArray;
 	}
-	public static double result(String x){
+	public static double result(String x){									// index of coincidence for a specific character in a given substring
 		double xyz = 0d;
 		for (char i = 'A'; i <= 'Z'; i++){
 			xyz += individualIC(numberOfLetters(x, i));
+			System.out.println("HAHA TAKE THIS char : " + i + " yeah boi " + xyz);
 		}
 		return xyz;
 	}
-	public static double individualIC(int[] x){					// for one letter in a broken ciphertext
+	public static double individualIC(int[] x){					// for one character in a given substring, taking in numberofchars, count of letters
 		double z = x[0];
 		return (z * (z - 1)) / (x[1] * (x[1] - 1));
 	}
