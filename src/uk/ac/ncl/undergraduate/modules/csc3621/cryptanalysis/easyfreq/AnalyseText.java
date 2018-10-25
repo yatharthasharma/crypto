@@ -28,25 +28,28 @@ public class AnalyseText {
 	}
 	public static double indexOfCoincidence(String cipherText, int keyLength){
 		cipherText = cipherText.toUpperCase();
+		double num = 0;
+		double[] total = new double[keyLength];
 		String[] arrayOfSubstrings = new String[keyLength];
-		int total = 0;
 		for (int j = 0; j < arrayOfSubstrings.length; j++){
-			for (int i = j; i <= cipherText.length(); i++){
+			for (int i = j; i < cipherText.length(); i++){
 				arrayOfSubstrings[j] += cipherText.charAt(i);
 				i += keyLength;
 			}
 		}
+		total = averageIndexOfCoincidence(arrayOfSubstrings);
 		for (int j = 0; j < arrayOfSubstrings.length; j++){
-			total += averageIndexOfCoincidence(arrayOfSubstrings);
+			num += total[j]; 
+			// numberOfLetters(arrayOfSubstrings[j]);
 		}
-		return 0d;
+		return num;
 	}
-	public static double averageIndexOfCoincidence(String[] x){
-		double total = 0d;
-		for (int i = 0; i < x.length; i++){
-			total += result(x[i]);
+	public static double[] averageIndexOfCoincidence(String[] x){
+		double[] totalArray = new double[x.length];
+		for (int j = 0; j < x.length; j++){
+			totalArray[j] += result(x[j]);	
 		}
-		return total/x.length;
+		return totalArray;
 	}
 	public static double result(String x){
 		double xyz = 0d;
