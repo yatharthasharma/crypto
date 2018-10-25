@@ -59,7 +59,6 @@ public class AnalyseText {
 		double maxFreq = 0;
 		char maxChar = 0;
 		FrequencyAnalyser w = new FrequencyAnalyser();
-		//AnalyseText.Analysing(ciphertext, w);
 		w.setText(ciphertext);
 		FrequencyTable x = w.analyse();
 		freqArray = x.getTable();
@@ -79,17 +78,17 @@ public class AnalyseText {
 
 	// freq of english letters from Exercise2Ciphertext.txt for ex2part4 ->
 	// CREATE METHOD
-	public static int[] freqAnalysisForVigenere(String[] arrayOfSubstrings) {
+	public static char[] freqAnalysisForVigenere(String[] arrayOfSubstrings) {
 		char maxCharInEnglishTexts = maxCharByFilePath("/res/pg1661.txt");
 		/*FrequencyAnalyser[] freqAnalyser = new FrequencyAnalyser[arrayOfSubstrings.length];
 		FrequencyTable[] freqTable = new FrequencyTable[arrayOfSubstrings.length];*/
-		int[] keys = new int[arrayOfSubstrings.length];
+		char[] keys = new char[arrayOfSubstrings.length];
 		for (int i = 0; i < arrayOfSubstrings.length; i++) {
 /*			freqAnalyser[i] = new FrequencyAnalyser();
 			freqTable[i] = new FrequencyTable();
 			AnalyseText.Analysing(arrayOfSubstrings[i], freqAnalyser[i]);
 			FrequencyTable x = freqAnalyser[i].analyse();*/
-			keys[i] = (int) maxCharByCipherText(arrayOfSubstrings[i]) - (int) maxCharInEnglishTexts;
+			keys[i] = (char)(maxCharByCipherText(arrayOfSubstrings[i]) - maxCharInEnglishTexts);
 		}
 		return keys;
 	}

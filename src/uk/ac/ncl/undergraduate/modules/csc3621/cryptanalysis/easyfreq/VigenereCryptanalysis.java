@@ -188,13 +188,17 @@ public class VigenereCryptanalysis {
 					IOCDiff = xdistance;
 				}
 			}
-			System.out.println("what is it now?: " + IOCs[haha] + " and the key is: " + (haha+2));
+			System.out.println("what is it now?: " + IOCs[haha] + " and the key length is: " + (haha+2));
 			keyLength = haha+2;
-			int[] keys = AnalyseText.freqAnalysisForVigenere(AnalyseText.getSubstrings(cipherText, keyLength));
-			for (int x : keys){
-				System.out.println(x);
+			char[] keys = AnalyseText.freqAnalysisForVigenere(AnalyseText.getSubstrings(cipherText, keyLength));
+			String keyAsString = "";
+			String ch;
+			for (int i = 0; i < keys.length; i++){
+				keys[i] += 'A';
+				ch = Character.toString(keys[i]);
+				keyAsString += ch;
 			}
-			this.key.append("A");
+			this.key.append(keyAsString);
 			// set path and key and get index of coincidences.
 
 		} catch (URISyntaxException e) {
