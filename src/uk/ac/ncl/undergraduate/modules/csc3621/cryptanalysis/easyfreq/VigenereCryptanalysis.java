@@ -171,29 +171,33 @@ public class VigenereCryptanalysis {
 			mainPathForCipherText = Paths.get(FrequencyCryptanalysis.class.getResource("/").toURI()).toString();
 			String cipherPlaintextFilePath = mainPathForCipherText + "/res/Exercise2Ciphertext.txt";
 			// AnalyseText.Analysing(cipherPlaintextFilePath, w);
-			bytes = Files.readAllBytes(Paths.get(cipherPlaintextFilePath)); // input text from the file
+			bytes = Files.readAllBytes(Paths.get(cipherPlaintextFilePath)); // input
+																			// text
+																			// from
+																			// the
+																			// file
 			String cipherText = new String(bytes, StandardCharsets.UTF_8);
-			for (int i = 0; i < 9; i++){
-				IOCs[i] = AnalyseText.indexOfCoincidence(cipherText, i+2);
-				System.out.println("This is for key length " + (i+2) + ": " + IOCs[i]);
+			for (int i = 0; i < 9; i++) {
+				IOCs[i] = AnalyseText.indexOfCoincidence(cipherText, i + 2);
+				System.out.println("This is for key length " + (i + 2) + ": " + IOCs[i]);
 			}
 			double eng = 0.067;
 			IOCDiff = Math.abs(IOCs[0] - eng);
 			int haha = 0;
 			keyLength = 2;
-			for (int i = 1; i < IOCs.length; i++){
+			for (int i = 1; i < IOCs.length; i++) {
 				double xdistance = Math.abs(IOCs[i] - eng);
-				if (xdistance < IOCDiff){
+				if (xdistance < IOCDiff) {
 					haha = i;
 					IOCDiff = xdistance;
 				}
 			}
-			System.out.println("what is it now?: " + IOCs[haha] + " and the key length is: " + (haha+2));
-			keyLength = haha+2;
+			System.out.println("what is it now?: " + IOCs[haha] + " and the key length is: " + (haha + 2));
+			keyLength = haha + 2;
 			char[] keys = AnalyseText.freqAnalysisForVigenere(AnalyseText.getSubstrings(cipherText, keyLength));
 			String keyAsString = "";
 			String ch;
-			for (int i = 0; i < keys.length; i++){
+			for (int i = 0; i < keys.length; i++) {
 				keys[i] += 'A';
 				ch = Character.toString(keys[i]);
 				keyAsString += ch;

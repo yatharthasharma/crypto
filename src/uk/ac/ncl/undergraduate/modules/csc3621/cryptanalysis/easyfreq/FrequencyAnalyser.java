@@ -56,28 +56,24 @@ public class FrequencyAnalyser {
 		// Please, do not remove the editor-fold comments.
 		// <editor-fold defaultstate="collapsed" desc="Write your code here
 		// below!">
-		FrequencyTable tableOfFreq = new FrequencyTable(); // declaring
-															// FrequencyTable
-															// object that is to
-															// be returned
-		int totalCountOfLetters = 0;
+		FrequencyTable tableOfFreq = new FrequencyTable(); 
+		int totalCountOfLetters = 0;							// total count of letters in the given text
 		Map<Character, Double> freq = new HashMap<Character, Double>();
-		String str = this.getText();
+		String str = this.getText();							// get text to be analysed
 		for (char x = 'A'; x <= 'Z'; x++) {
-			freq.put(x, 0d);
+			freq.put(x, 0d);									// put values (A-Z, 0) in the hashmap
 		}
 		for (int i = 0; i < str.length(); i++) {
-			char ch = Character.toUpperCase(str.charAt(i));
-			if ((ch >= 65 && ch <= 90)) {
-				freq.put(ch, freq.get(ch) + 1);
-				totalCountOfLetters++;
+			char ch = Character.toUpperCase(str.charAt(i));		// change character to uppercase
+			if ((ch >= 65 && ch <= 90)) {						// if character in the range A-Z (ASCII code)
+				freq.put(ch, freq.get(ch) + 1);					// increase value of the char in the map
+				totalCountOfLetters++;							// increase total count of letters
 			}
 		}
 		for (char key : freq.keySet()) {
-			tableOfFreq.setFrequency(key, freq.get(key).doubleValue() / totalCountOfLetters); // calculating
-																								// frequency
+			tableOfFreq.setFrequency(key, freq.get(key).doubleValue() / totalCountOfLetters); // calculate frequency
 		}
-		return tableOfFreq;
+		return tableOfFreq;										// return frequency table	
 
 		// </editor-fold> // END OF YOUR CODE
 	}

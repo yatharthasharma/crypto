@@ -17,9 +17,9 @@ public class EncryptVigenere {
 			byte[] bytes = Files.readAllBytes(Paths.get(plaintextFilePath));
 			String str = new String(bytes, StandardCharsets.UTF_8);
 			System.out.println("entereing encrypt ");
-			String encryptedText = VigenereCipher.encrypt(str, "lovecrypto");
+			String encryptedText = VigenereCipher.encrypt("newcastleuniversity", "ncl");
 			System.out.println("entereing decrypt ");
-			String decryptedText = VigenereCipher.decrypt(encryptedText, "lovecrypto");
+			String decryptedText = VigenereCipher.decrypt(encryptedText, "ncl");
 			System.out.println("leaving decrypt ");
 			Util.printBufferToFile(encryptedText, encPath);
 			Util.printBufferToFile(decryptedText, decPath);
